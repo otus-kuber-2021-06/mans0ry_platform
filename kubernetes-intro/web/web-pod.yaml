@@ -7,4 +7,17 @@ metadata:
 spec:
   containers: 
     - name: web
-      image: mansory/web:latest
+      image: mansory/web:intro
+      volumeMounts:
+      - mountPath: /app
+        name: app
+  volumes:
+    - name: app
+      emptyDir: {}
+  initContainers:
+    - name: page
+      image: busybox:1.31.0
+      command: ['sh', '-c', 'wget -O- https://tinyurl.com/otus-k8s-intro | sh && cat /app/index.html']
+      volumeMounts:
+      - mountPath: /app
+        name: app

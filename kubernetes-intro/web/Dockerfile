@@ -14,6 +14,7 @@ COPY --from=builder /go/bin/web /src/web
 COPY ./app ./app
 
 RUN addgroup -S -g 1001 developer && adduser -S developer -G developer --uid 1001
+RUN chown -Rvc developer:developer /src
 USER developer
 
 EXPOSE 8000
