@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: payment
   labels:
-    app: payment
+    app: paymentservice
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: payment
+      app: paymentservice
   template:
     metadata:
       labels:
-        app: payment
+        app: paymentservice
     spec:
       containers:
       - name: payment
