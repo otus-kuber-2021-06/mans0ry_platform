@@ -4,17 +4,15 @@ metadata:
   name: frontend
   labels:
     app: frontend
-    tier: frontend
 spec:
   replicas: 3
   selector:
     matchLabels:
-      tier: frontend
+      app: frontend
   template:
     metadata:
       labels:
         app: frontend
-        tier: frontend
     spec:
       containers:
       - name: frontend

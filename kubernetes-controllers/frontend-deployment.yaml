@@ -4,23 +4,29 @@ metadata:
   name: frontend
   labels:
     app: frontend
-    tier: frontend
 spec:
   replicas: 3
   selector:
     matchLabels:
-      tier: frontend
+      app: frontend
   template:
     metadata:
       labels:
         app: frontend
-        tier: frontend
     spec:
       containers:
       - name: frontend
         image: mansory/frontend:v0.1
         ports:
           - containerPort: 8080
+        readinessProbe:
+            initialDelaySeconds: 10
+            httpGet:
+              path: "/_healthz"
+              port: 8080
+              httpHeaders:
+              - name: "Cookie"
+                value: "shop_session-id=x-readiness-probe"
         env:
           - name: PRODUCT_CATALOG_SERVICE_ADDR
             value: "productcatalogservice:3550"
